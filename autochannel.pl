@@ -12,15 +12,15 @@ $Data::Dumper::Indent = 1;
 # ======[ Script Header ]===============================================
 
 use vars qw{$VERSION %IRSSI};
-($VERSION) = '$Revision: 1.1 $' =~ / (\d+\.\d+) /;
+($VERSION) = ' $Revision: 1.2 $ ' =~ / (\d+\.\d+) /;
 %IRSSI = (
-          name        => 'autochannel',
-          authors     => 'Peder Stray',
-          contact     => 'peder@ninja.no',
-          url         => 'http://ninja.no/irssi/autochannel.pl',
-          license     => 'GPL',
-          description => 'Auto add channels to channel list on join',
-         );
+	  name        => 'autochannel',
+	  authors     => 'Peder Stray',
+	  contact     => 'peder@ninja.no',
+	  url         => 'http://ninja.no/irssi/autochannel.pl',
+	  license     => 'GPL',
+	  description => 'Auto add channels to channel list on join',
+	 );
 
 # ======[ Signal hooks ]================================================
 
@@ -31,7 +31,7 @@ sub sig_message_join {
     return unless $nick eq $server->{nick};
     return unless $server->{chatnet};
     return unless Irssi::settings_get_bool('channel_add_on_join');
-    
+
     Irssi::command(sprintf "channel add %s %s %s",
 		   Irssi::settings_get_bool('channel_add_with_auto')
 		   ? '-auto' : '',
