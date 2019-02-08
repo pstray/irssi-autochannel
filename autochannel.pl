@@ -1,5 +1,5 @@
 #
-# Copyright (C) 2007-2014 by Peder Stray <peder@ninja.no>
+# Copyright (C) 2007-2019 by Peder Stray <peder@ninja.no>
 #
 
 use strict;
@@ -8,8 +8,6 @@ use Irssi::Irc;
 
 use Data::Dumper;
 $Data::Dumper::Indent = 1;
-
-# ======[ Script Header ]===============================================
 
 use vars qw{$VERSION %IRSSI};
 ($VERSION) = ' $Revision: 1.3 $ ' =~ / (\d+\.\d+) /;
@@ -21,8 +19,6 @@ use vars qw{$VERSION %IRSSI};
 	  license     => 'GPL',
 	  description => 'Auto add channels to channel list on join',
 	 );
-
-# ======[ Signal hooks ]================================================
 
 # "channel joined", channel
 sub sig_channel_joined {
@@ -67,23 +63,10 @@ sub sig_message_part {
     }
 }
 
-# ======[ Setup ]=======================================================
-
-# --------[ Settings ]--------------------------------------------------
-
 Irssi::settings_add_bool('autochannel', 'channel_add_on_join', 1);
 Irssi::settings_add_bool('autochannel', 'channel_add_with_auto', 1);
 Irssi::settings_add_bool('autochannel', 'channel_remove_auto_on_part', 1);
 Irssi::settings_add_bool('autochannel', 'channel_remove_on_part', 0);
 
-# --------[ Signals ]---------------------------------------------------
-
 Irssi::signal_add_last('channel joined', 'sig_channel_joined');
 Irssi::signal_add_last('message part', 'sig_message_part');
-
-# ======[ END ]=========================================================
-
-# Local Variables:
-# header-initial-hide: t
-# mode: header-minor
-# end:
