@@ -31,8 +31,6 @@ sub sig_channel_joined {
     my $server  = $c->{server};
     my $channel = $c->{name};
 
-#    print Dumper $channel;
-
     return unless $server->{chatnet};
     return unless Irssi::settings_get_bool('channel_add_on_join');
 
@@ -43,22 +41,6 @@ sub sig_channel_joined {
 		   $server->{chatnet},
 		  );
 }
-
-# "message join", SERVER_REC, char *channel, char *nick, char *address
-# sub sig_message_join {
-#     my($server,$channel,$nick,$addr) = @_;
-
-#     return unless $nick eq $server->{nick};
-#     return unless $server->{chatnet};
-#     return unless Irssi::settings_get_bool('channel_add_on_join');
-
-#     Irssi::command(sprintf "channel add %s %s %s",
-#		   Irssi::settings_get_bool('channel_add_with_auto')
-#		   ? '-auto' : '',
-#		   $channel,
-#		   $server->{chatnet},
-#		  );
-# }
 
 # "message part", SERVER_REC, char *channel, char *nick, char *address, char *reason
 sub sig_message_part {
@@ -97,7 +79,6 @@ Irssi::settings_add_bool('autochannel', 'channel_remove_on_part', 0);
 # --------[ Signals ]---------------------------------------------------
 
 Irssi::signal_add_last('channel joined', 'sig_channel_joined');
-#Irssi::signal_add_last('message join', 'sig_message_join');
 Irssi::signal_add_last('message part', 'sig_message_part');
 
 # ======[ END ]=========================================================
